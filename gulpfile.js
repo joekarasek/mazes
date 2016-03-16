@@ -30,7 +30,15 @@ var lib = require('bower-files')({
 // Required to control whether the final build is minified
 var buildProduction = utilities.env.production;
 
-// start server
+// ==================================
+// **********************************
+//               Tasks
+// Note: Serve is designed to run all
+// other tasks including build, lint,
+// launch server, and initiate
+// browser-sync
+// ==================================
+// start server, runs all builds, sets up watch, cleans tmp file
 gulp.task('serve', ['buildStart'], function(){
   gulp.start('jshint');
   browserSync.init({
@@ -44,31 +52,31 @@ gulp.task('serve', ['buildStart'], function(){
   gulp.watch('./scss/*.scss', ['cssBuild', 'reload']);
   gulp.start('removeTmp');
 });
-/// end of serve task
 
-// Reloads the browser window
+// Reloads the browser window, used by gulp.watch
 gulp.task('reload', function() {
   browserSync.reload();
 });
 
-// initial clean files
+// initial clean files, clears build, clears tmp (in case it was not already deleted)
 gulp.task('initialClean', function(){
   return del(['build', 'tmp']);
 });
 
-// removed tmp file
+// removed tmp file, runs at end of serve after all builds finish (hopefully)
 gulp.task('removeTmp', function(){
   return del(['tmp']);
 });
 
-// catch all to build everything
+// starts initial clean before all builds fires off
 gulp.task('buildStart', ['initialClean'], function() {
   gulp.start('buildAll');
 });
 
+// starts cssBuild (sass), bowerBuild (front-end dependencies), and jsBrowserify (js)
 gulp.task('buildAll', ['cssBuild', 'bowerBuild', 'jsBrowserify']);
 
-// builds css files
+// compile sass/scss, builds css files
 gulp.task('cssBuild', function() {
   return gulp.src('scss/*.scss')
     .pipe(sourcemaps.init())
@@ -77,10 +85,10 @@ gulp.task('cssBuild', function() {
     .pipe(gulp.dest('./build/css'));
 });
 
-// will run JS and CSS for bower concurrently
+// will run JS and CSS for bower (front-end dependencies)
 gulp.task('bowerBuild', ['bowerJS', 'bowerCSS']);
 
-// front end dependencies js gulp
+// front end dependencies js
 gulp.task('bowerJS', function () {
   return gulp.src(lib.ext('js').files)
     .pipe(concat('vendor.min.js'))
@@ -96,7 +104,6 @@ gulp.task('bowerCSS', function () {
 });
 
 // Takes concatenated JS and browserify's it
-// using a second arguement with gulp.task, we are passing in an array of task dependencies -> tasks to run first for this task to work
 gulp.task('jsBrowserify' , ['concat'] , function() {
   return browserify({ entries: ['./tmp/allConcat.js']})
   .bundle()
