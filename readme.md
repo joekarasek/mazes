@@ -37,6 +37,8 @@ _The project was put together using ._
 
 _This application is not fully designed and may have unknown bugs._
 
+_The current gulpfile.js does not handle creation of a production version of the build (with minified js). Front-end dependencies will still be minified._
+
 ## To Do (coming in future versions)
 
 1. [ ] No crash at errors during watch. Will log errors but not attempt a rebuild.
