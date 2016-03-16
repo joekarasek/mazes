@@ -37,6 +37,11 @@ _The project was put together using ._
 
 _This application is not fully designed and may have unknown bugs._
 
+## To Do (coming in future versions)
+
+1. [ ] No crash at errors during watch. Will log errors but not attempt a rebuild.
+2. [ ] Folder for organizing html files, gulp will build fresh html in the build folder.
+
 ## Support and contact details
 
 _If you have any questions, concerns, or feedback, please contact the authors through_ [gitHub](https://github.com/joekarasek/).
