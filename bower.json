@@ -1,0 +1,22 @@
+{
+  "name": "project title",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Author Names"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/joekarasek/node_template",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "build",
+    "tmp"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "bootstrap": "^3.3.6"
+  }
+}
