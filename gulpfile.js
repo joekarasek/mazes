@@ -47,7 +47,7 @@ gulp.task('serve', ['buildStart'], function(){
       index: "index.html"
     }
   });
-  gulp.watch('./js/*.js', ['jsBrowserify', 'jshint', 'reload']);
+  gulp.watch('./js/*.js', ['jsBrowserify', 'reload']);
   gulp.watch('./*.html', ['reload']);
   gulp.watch('./scss/*.scss', ['cssBuild', 'reload']);
   gulp.start('removeTmp');
@@ -104,7 +104,7 @@ gulp.task('bowerCSS', function () {
 });
 
 // Takes concatenated JS and browserify's it
-gulp.task('jsBrowserify' , ['concat'] , function() {
+gulp.task('jsBrowserify' , ['concat', 'jshint'] , function() {
   return browserify({ entries: ['./tmp/allConcat.js']})
   .bundle()
   .pipe(source('app.js'))
@@ -122,5 +122,6 @@ gulp.task('concat', function() {
 gulp.task('jshint', function(){
   return gulp.src(['js/*.js'])
     .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'));
 });
