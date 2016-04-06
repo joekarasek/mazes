@@ -113,7 +113,7 @@ gulp.task('jsBrowserify' , ['concat', 'jshint'] , function() {
 
 // concat all js files, puts in tmp
 gulp.task('concat', function() {
-  return gulp.src(['./js/*.js'])
+  return gulp.src(['./js/*-interface.js'])
   .pipe(concat('allConcat.js'))
   .pipe(gulp.dest('./tmp'));
 });
