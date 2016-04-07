@@ -72,6 +72,13 @@ Grid.prototype.getCell = function(row,col) {
   }
 };
 
+// Get a random cell from the grid
+Grid.prototype.sample = function() {
+  var randomRow = Math.floor((Math.random() * this.rows) + 1);
+  var randomCol = Math.floor((Math.random() * this.cols) + 1);
+  return this.getCell(randomRow, randomCol);
+}
+
 // Get a row of the grid
 Grid.prototype.getRow = function(row) {
   var isInGrid = (row >= 0 && row < this.rows);
@@ -82,11 +89,16 @@ Grid.prototype.getRow = function(row) {
   }
 }
 
-// Get a random cell from the grid
-Grid.prototype.sample = function() {
-  var randomRow = Math.floor((Math.random() * this.rows) + 1);
-  var randomCol = Math.floor((Math.random() * this.cols) + 1);
-  return this.getCell(randomRow, randomCol);
+// Get all cells, as an array
+Grid.prototype.getAll = function() {
+  var results = [];
+  for (i=0; i<this.rows; i++) {
+    for (j=0; j<this.cols; j++) {
+      results.push( this.getCell(i,j) );
+    }
+  }
+  return results;
 }
+
 
 exports.Grid = Grid;
