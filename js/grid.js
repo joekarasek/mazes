@@ -10,7 +10,7 @@ function Grid() {
 Grid.prototype.cell = function(row,col) {
   var isInGrid = (row >= 0 && row < this.rows && col >= 0 && col < this.cols);
   if (isInGrid) {
-    return true;
+    return this.cells[row][col];
     // Eventually for maps that are not fully populated
     // return this.cells[row][col] ? this.cells[row][col] : false;
   } else {
@@ -36,27 +36,28 @@ Grid.prototype.setSize = function(rows, cols) {
 Grid.prototype.initialize = function() {
   for (i=0; i<this.rows; i++) {
     for (j=0; j<this.cols; j++) {
-      // Set's neighbors for each cell. Note: this function is supclassed to allow future modifications
+      // Set's neighbors for each cell. Note: this function is subclassed to allow future modifications
       this.setNeighbors(this.cell(i,j));
     }
   }
 }
 
+// Used by initialize to set neighbors of all cells, configed to work with square cells
 Grid.prototype.setNeighbors = function(cell) {
   var row = cell.row;
   var col = cell.col;
 
   if (this.cell(row-1, col)) {
-    this.cell.neighbor(this.cell(row-1, col), 'north');
+    cell.addNeighbor(this.cell(row-1, col), 'north');
   }
   if (this.cell(row, col-1)) {
-    this.cell.neighbor(this.cell(row, col-1), 'west');
+    cell.addNeighbor(this.cell(row, col-1), 'west');
   }
   if (this.cell(row+1, col)) {
-    this.cell.neighbor(this.cell(row+1, col), 'south');
+    cell.addNeighbor(this.cell(row+1, col), 'south');
   }
   if (this.cell(row, col+1)) {
-    this.cell.neighbor(this.cell(row, col+1), 'east');
+    cell.addNeighbor(this.cell(row, col+1), 'east');
   }
 }
 

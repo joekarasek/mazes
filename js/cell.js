@@ -18,7 +18,7 @@ function Cell() {
 }
 
 // Set a cell as a neighbor of this cell
-Cell.prototype.neighbor = function(cell, relation) {
+Cell.prototype.addNeighbor = function(cell, relation) {
   this.neighbors[relation] = cell;
 }
 // Bidirectional linking of cells
