@@ -4,10 +4,10 @@ var BinaryTree = require('./../js/binaryTree.js').BinaryTree;
 
 $(document).ready(function(){
   var myGrid = new Grid();
-  myGrid.setSize(3,3);
+  myGrid.setSize(5,5);
   myGrid.initialize();
   console.log("The Grid", myGrid);
   var myBinaryTree = new BinaryTree();
   myBinaryTree.generate(myGrid);
-  debugger;
+  $('#maze').append(myGrid.toHtmlString());
 });

@@ -40,7 +40,7 @@ Cell.prototype.unlink = function(cell) {
 
 // Query if queryCell is linked to this cell
 Cell.prototype.isLinked = function(queryCell) {
-  if(htis.links.indexOf(queryCell) === -1) {
+  if(this.links.indexOf(queryCell) === -1) {
     return false;
   } else {
     return true;

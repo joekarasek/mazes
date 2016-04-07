@@ -100,5 +100,46 @@ Grid.prototype.getAll = function() {
   return results;
 }
 
+// End: Getters
+// =================================
+// Start: Displayers
+
+// Simple text version of maze, suggest you use monospace font-family
+Grid.prototype.toHtmlString= function() {
+  var result = '<p>+';
+
+  // Build top border
+  for(i=0; i<this.cols; i++) {
+    result += "---+";
+  }
+  result += '</p>';
+
+  // Build by row
+  for(i=0; i<this.rows; i++) {
+    // West map border
+    result += "<p>|";
+    // Draw cells and east/west walls
+    for(j=0; j<this.cols; j++) {
+      if(this.getCell(i,j).isLinked(this.getCell(i, j+1))) {
+        result += "    ";
+      } else {
+        result += "   |";
+      }
+    }
+    // West map border
+    result += "</p><p>+";
+    // Draw north/south walls
+    for(j=0; j<this.cols; j++) {
+      if(this.getCell(i,j).isLinked(this.getCell(i+1, j))) {
+        result += "   +";
+      } else {
+        result += "---+";
+      }
+    }
+    result += "</p>";
+  }
+
+  return result;
+}
 
 exports.Grid = Grid;
