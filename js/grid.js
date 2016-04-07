@@ -26,6 +26,8 @@ Grid.prototype.setSize = function(rows, cols) {
     this.cells.push([]);
     for (j=0; j<this.cols; j++) {
       this.cells[i][j] = new Cell();
+      this.cells[i][j].row = i;
+      this.cells[i][j].col = j;
     }
   }
 }
