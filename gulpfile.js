@@ -74,7 +74,13 @@ gulp.task('buildStart', ['initialClean'], function() {
 });
 
 // starts cssBuild (sass), bowerBuild (front-end dependencies), and jsBrowserify (js)
-gulp.task('buildAll', ['cssBuild', 'bowerBuild', 'jsBrowserify']);
+gulp.task('buildAll', ['cssBuild', 'bowerBuild', 'jsBrowserify', 'fonts']);
+
+// move over font files
+gulp.task('fonts', function() {
+  return gulp.src('fonts/*.ttf')
+    .pipe(gulp.dest('./build/css/fonts'));
+});
 
 // compile sass/scss, builds css files
 gulp.task('cssBuild', function() {
