@@ -1,0 +1,8 @@
+@font-face {
+  font-family: joystick;
+  src: url("fonts/joystix.ttf"); }
+
+body {
+  font-family: joystick; }
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGVzLmNzcyIsInNvdXJjZXMiOlsic3R5bGVzLnNjc3MiXSwic291cmNlc0NvbnRlbnQiOlsiQGZvbnQtZmFjZSB7IGZvbnQtZmFtaWx5OiBqb3lzdGljazsgc3JjOiB1cmwoJ2ZvbnRzL2pveXN0aXgudHRmJyk7IH1cblxuYm9keSB7XG4gIGZvbnQtZmFtaWx5OiBqb3lzdGljaztcbn1cbiJdLCJtYXBwaW5ncyI6IkFBQUEsVUFBVTtFQUFHLFdBQVcsRUFBRSxRQUFTO0VBQUUsR0FBRyxFQUFFLHdCQUFHOztBQUU3QyxJQUFJLENBQUM7RUFDSCxXQUFXLEVBQUUsUUFBUyxHQUN2QiIsIm5hbWVzIjpbXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0= */
