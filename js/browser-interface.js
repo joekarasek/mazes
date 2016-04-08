@@ -6,7 +6,7 @@ var render = function(grid) {
   var canvas = document.getElementById('maze');
   var ctx = canvas.getContext('2d');
   ctx.fillStyle = "white";
-  ctx.fillRect(0,0,800,800);
+  ctx.clearRect(0,0,800,800);
 
   var cells = grid.getAll();
 
@@ -42,12 +42,17 @@ var render = function(grid) {
 }
 
 $(document).ready(function(){
-  var myGrid = new Grid();
-  myGrid.setSize(10,10);
-  myGrid.initialize();
-  console.log("The Grid", myGrid);
-  var myBinaryTree = new BinaryTree();
-  myBinaryTree.generate(myGrid);
-  $('#mazePrint').append(myGrid.toHtmlString());
-  render(myGrid);
+
+  // $('#mazePrint').append(myGrid.toHtmlString());
+
+  $('button[name="newMaze"]').click(function() {
+    var myGrid = new Grid();
+    myGrid.setSize(10,10);
+    myGrid.initialize();
+    console.log("The Grid", myGrid);
+    var myBinaryTree = new BinaryTree();
+    myBinaryTree.generate(myGrid);
+    render(myGrid);
+  });
+
 });
