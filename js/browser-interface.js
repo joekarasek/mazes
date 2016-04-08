@@ -24,18 +24,20 @@ var render = function(grid) {
 
   });
 
-  // Draw connections
+  // Draw passages
   ctx.fillStyle = "white";
   cells.forEach(function(cell) {
     var row = cell.row;
     var col = cell.col;
+    // Draw east/west passage
     if(cell.isLinked(cell.neighbors['east'])) {
       // ctx.fillRect(70,20,20,40);
-      ctx.fillRect(col*80+70,row*80+20,20,40);
+      ctx.fillRect(col*80+70,row*80+6,20,68);
     }
+    // Draw sout/north passage
     if(cell.isLinked(cell.neighbors['south'])) {
       // ctx.fillRect(20,70,40,20);
-      ctx.fillRect(col*80+20,row*80+70,40,20);
+      ctx.fillRect(col*80+6,row*80+70,68,20);
     }
     // debugger;
   });
