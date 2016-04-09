@@ -47,5 +47,15 @@ Cell.prototype.isLinked = function(queryCell) {
   }
 }
 
+// Sample a neighbor
+Cell.prototype.sampleNeighbor = function() {
+  var keys = ['north','east','south','west'];
+  var index;
+  do {
+    index = Math.floor(Math.random() * 4);
+  } while (!this.neighbors[keys[index]]);
+  return this.neighbors[keys[index]];
+}
+
 
 exports.Cell = Cell;
