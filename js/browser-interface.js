@@ -1,6 +1,7 @@
 var Grid = require('./../js/grid.js').Grid;
 var Cell = require('./../js/cell.js').Cell;
 var BinaryTree = require('./../js/binaryTree.js').BinaryTree;
+var Sidewinder = require('./../js/sidewinder.js').Sidewinder;
 
 var render = function(grid) {
   var canvas = document.getElementById('maze');
@@ -54,6 +55,16 @@ $(document).ready(function(){
     console.log("The Grid", myGrid);
     var myBinaryTree = new BinaryTree();
     myBinaryTree.generate(myGrid);
+    render(myGrid);
+  });
+
+  $('button[name="newMaze2"]').click(function() {
+    var myGrid = new Grid();
+    myGrid.setSize(10,10);
+    myGrid.initialize();
+    console.log("The Grid", myGrid);
+    var mySidewinder = new Sidewinder();
+    mySidewinder.generate(myGrid, 0.5);
     render(myGrid);
   });
 
