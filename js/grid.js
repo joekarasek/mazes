@@ -100,6 +100,11 @@ Grid.prototype.getAll = function() {
   return results;
 }
 
+// Get the total number of cells in the grid
+Grid.prototype.size = function() {
+  return this.getAll().length;
+}
+
 // End: Getters
 // =================================
 // Start: Displayers

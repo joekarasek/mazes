@@ -2,6 +2,35 @@
 var Grid = require('./../js/grid.js').Grid;
 var Cell = require('./../js/cell.js').Cell;
 
+function AldousBroder() {
+
+}
+
+AldousBroder.prototype.generate = function(grid) {
+  var cell = grid.sample();
+  var unvisited = grid.size() - 1;
+
+  while (unvisited > 0) {
+    var neighbor = cell.sampleNeighbor();
+
+    // debugger;
+    // console.log(cell);
+
+    if (neighbor.links.length === 0) {
+      cell.link(neighbor);
+      unvisited--;
+    }
+
+    cell = neighbor;
+  }
+}
+
+exports.AldousBroder = AldousBroder;
+
+},{"./../js/cell.js":3,"./../js/grid.js":4}],2:[function(require,module,exports){
+var Grid = require('./../js/grid.js').Grid;
+var Cell = require('./../js/cell.js').Cell;
+
 function BinaryTree() {
 }
 
@@ -26,7 +55,7 @@ BinaryTree.prototype.generate = function(grid) {
 
 exports.BinaryTree = BinaryTree;
 
-},{"./../js/cell.js":2,"./../js/grid.js":3}],2:[function(require,module,exports){
+},{"./../js/cell.js":3,"./../js/grid.js":4}],3:[function(require,module,exports){
 // ============================
 // Cell Object Declaractions
 // ============================
@@ -76,10 +105,20 @@ Cell.prototype.isLinked = function(queryCell) {
   }
 }
 
+// Sample a neighbor
+Cell.prototype.sampleNeighbor = function() {
+  var keys = ['north','east','south','west'];
+  var index;
+  do {
+    index = Math.floor(Math.random() * 4);
+  } while (!this.neighbors[keys[index]]);
+  return this.neighbors[keys[index]];
+}
+
 
 exports.Cell = Cell;
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 // =================================
 // Required files
 
@@ -182,6 +221,11 @@ Grid.prototype.getAll = function() {
   return results;
 }
 
+// Get the total number of cells in the grid
+Grid.prototype.size = function() {
+  return this.getAll().length;
+}
+
 // End: Getters
 // =================================
 // Start: Displayers
@@ -226,10 +270,48 @@ Grid.prototype.toHtmlString= function() {
 
 exports.Grid = Grid;
 
-},{"./../js/cell.js":2}],4:[function(require,module,exports){
+},{"./../js/cell.js":3}],5:[function(require,module,exports){
+var Grid = require('./../js/grid.js').Grid;
+var Cell = require('./../js/cell.js').Cell;
+
+function Sidewinder() {
+
+}
+
+// Gird is the cell grid for the given maze. Param is variable between 0 and 1 that determines the frequency of 'sidewiding'
+Sidewinder.prototype.generate = function(grid, param) {
+  grid.cells.forEach(function(row) {
+    var run = [];
+
+    row.forEach(function(cell) {
+      run.push(cell);
+
+      var at_eastern_boundary = (cell.neighbors.east == null);
+      var at_northern_boundary = (cell.neighbors.north == null);
+
+      should_close_out = at_eastern_boundary || (!at_northern_boundary && Math.random() < param);
+
+      if (should_close_out) {
+        var index = Math.floor(Math.random()*run.length);
+        if (run[index].neighbors.north) {
+          run[index].link(run[index].neighbors.north);
+        }
+        run = [];
+      } else {
+        cell.link(cell.neighbors.east);
+      }
+    });
+  });
+}
+
+exports.Sidewinder = Sidewinder;
+
+},{"./../js/cell.js":3,"./../js/grid.js":4}],6:[function(require,module,exports){
 var Grid = require('./../js/grid.js').Grid;
 var Cell = require('./../js/cell.js').Cell;
 var BinaryTree = require('./../js/binaryTree.js').BinaryTree;
+var Sidewinder = require('./../js/sidewinder.js').Sidewinder;
+var AldousBroder = require('./../js/aldousBroder.js').AldousBroder;
 
 var render = function(grid) {
   var canvas = document.getElementById('maze');
@@ -286,6 +368,26 @@ $(document).ready(function(){
     render(myGrid);
   });
 
+  $('button[name="newMaze2"]').click(function() {
+    var myGrid = new Grid();
+    myGrid.setSize(10,10);
+    myGrid.initialize();
+    console.log("The Grid", myGrid);
+    var mySidewinder = new Sidewinder();
+    mySidewinder.generate(myGrid, 0.5);
+    render(myGrid);
+  });
+
+  $('button[name="newMaze3"]').click(function() {
+    var myGrid = new Grid();
+    myGrid.setSize(10,10);
+    myGrid.initialize();
+    console.log("The Grid", myGrid);
+    var myAldousBroder = new AldousBroder();
+    myAldousBroder.generate(myGrid);
+    render(myGrid);
+  });
+
 });
 
-},{"./../js/binaryTree.js":1,"./../js/cell.js":2,"./../js/grid.js":3}]},{},[4]);
+},{"./../js/aldousBroder.js":1,"./../js/binaryTree.js":2,"./../js/cell.js":3,"./../js/grid.js":4,"./../js/sidewinder.js":5}]},{},[6]);
