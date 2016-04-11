@@ -22,6 +22,6 @@ AldousBroder.prototype.generate = function(grid) {
 
     cell = neighbor;
   }
-}
+};
 
 exports.AldousBroder = AldousBroder;

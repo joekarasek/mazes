@@ -23,7 +23,7 @@ AldousBroder.prototype.generate = function(grid) {
 
     cell = neighbor;
   }
-}
+};
 
 exports.AldousBroder = AldousBroder;
 
@@ -51,7 +51,7 @@ BinaryTree.prototype.generate = function(grid) {
     }
 
   });
-}
+};
 
 exports.BinaryTree = BinaryTree;
 

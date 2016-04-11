@@ -21,6 +21,6 @@ BinaryTree.prototype.generate = function(grid) {
     }
 
   });
-}
+};
 
 exports.BinaryTree = BinaryTree;
