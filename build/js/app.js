@@ -338,36 +338,27 @@ Render.prototype.flexible = function(grid) {
   ctx.clearRect(0,0,canvasWidth,canvasHeight);
 
   // Draw walls
-  ctx.fillStyle = "black";
+  ctx.fillStyle = "green";
   cells.forEach(function(cell) {
     var row = cell.row;
     var col = cell.col;
     ctx.strokeRect(col*cellWidth,row*cellHeight,cellWidth,cellHeight);
-
-    // ctx.fillRect(col*80,row*80,80,5);
-    // ctx.fillRect(col*80,row*80,5,80);
-    // ctx.fillRect(col*80+75,row*80,5,80);
-    // ctx.fillRect(col*80,row*80+75,80,5);
-
   });
-  //
-  // // Draw passages
-  // ctx.fillStyle = "white";
-  // cells.forEach(function(cell) {
-  //   var row = cell.row;
-  //   var col = cell.col;
-  //   // Draw east/west passage
-  //   if(cell.isLinked(cell.neighbors['east'])) {
-  //     // ctx.fillRect(70,20,20,40);
-  //     ctx.fillRect(col*80+70,row*80+6,20,68);
-  //   }
-  //   // Draw sout/north passage
-  //   if(cell.isLinked(cell.neighbors['south'])) {
-  //     // ctx.fillRect(20,70,40,20);
-  //     ctx.fillRect(col*80+6,row*80+70,68,20);
-  //   }
-  //   // debugger;
-  // });
+
+  // Draw passages
+  ctx.fillStyle = "white";
+  cells.forEach(function(cell) {
+    var row = cell.row;
+    var col = cell.col;
+    // Draw east/west passage
+    if(cell.isLinked(cell.neighbors['east'])) {
+      ctx.fillRect((col+1)*cellWidth-1,row*cellHeight+1,2,cellHeight-2);
+    }
+    // Draw sout/north passage
+    if(cell.isLinked(cell.neighbors['south'])) {
+      ctx.fillRect(col*cellWidth+1,(row+1)*cellHeight-1,cellWidth-2,2);
+    }
+  });
 }
 
 exports.Render = Render;
@@ -431,7 +422,7 @@ $(document).ready(function(){
 
   $('button[name="binaryMaze"]').click(function() {
     var myGrid = new Grid();
-    myGrid.setSize(10,10);
+    myGrid.setSize(16,16);
     myGrid.initialize();
     console.log("The Grid", myGrid);
     var myBinaryTree = new BinaryTree();
@@ -441,22 +432,22 @@ $(document).ready(function(){
 
   $('button[name="sidewinderMaze"]').click(function() {
     var myGrid = new Grid();
-    myGrid.setSize(10,10);
+    myGrid.setSize(16,16);
     myGrid.initialize();
     console.log("The Grid", myGrid);
     var mySidewinder = new Sidewinder();
     mySidewinder.generate(myGrid, 0.5);
-    myRender.simple(myGrid);
+    myRender.flexible(myGrid);
   });
 
   $('button[name="aldousbroderMaze"]').click(function() {
     var myGrid = new Grid();
-    myGrid.setSize(10,10);
+    myGrid.setSize(32,32);
     myGrid.initialize();
     console.log("The Grid", myGrid);
     var myAldousBroder = new AldousBroder();
     myAldousBroder.generate(myGrid);
-    myRender.simple(myGrid);
+    myRender.flexible(myGrid);
   });
 
 });

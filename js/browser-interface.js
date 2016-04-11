@@ -20,7 +20,7 @@ $(document).ready(function(){
 
   $('button[name="binaryMaze"]').click(function() {
     var myGrid = new Grid();
-    myGrid.setSize(10,10);
+    myGrid.setSize(16,16);
     myGrid.initialize();
     console.log("The Grid", myGrid);
     var myBinaryTree = new BinaryTree();
@@ -30,22 +30,22 @@ $(document).ready(function(){
 
   $('button[name="sidewinderMaze"]').click(function() {
     var myGrid = new Grid();
-    myGrid.setSize(10,10);
+    myGrid.setSize(16,16);
     myGrid.initialize();
     console.log("The Grid", myGrid);
     var mySidewinder = new Sidewinder();
     mySidewinder.generate(myGrid, 0.5);
-    myRender.simple(myGrid);
+    myRender.flexible(myGrid);
   });
 
   $('button[name="aldousbroderMaze"]').click(function() {
     var myGrid = new Grid();
-    myGrid.setSize(10,10);
+    myGrid.setSize(32,32);
     myGrid.initialize();
     console.log("The Grid", myGrid);
     var myAldousBroder = new AldousBroder();
     myAldousBroder.generate(myGrid);
-    myRender.simple(myGrid);
+    myRender.flexible(myGrid);
   });
 
 });
