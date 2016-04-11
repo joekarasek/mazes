@@ -277,47 +277,6 @@ var Cell = require('./../js/cell.js').Cell;
 function Render() {
 }
 
-// Render.prototype.simple = function(grid) {
-//   // Initialize canvas and drawing tool
-//   var canvas = document.getElementById('maze');
-//   var ctx = canvas.getContext('2d');
-//   // Clear the canvas
-//   ctx.fillStyle = "white";
-//   ctx.clearRect(0,0,800,800);
-//
-//   // Get all the cells of the maze
-//   var cells = grid.getAll();
-//
-//   // Draw walls
-//   ctx.fillStyle = "black";
-//   cells.forEach(function(cell) {
-//     var row = cell.row;
-//     var col = cell.col;
-//     ctx.strokeRect(col*80+5,row*80+5,70,70);
-//
-//     ctx.fillRect(col*80,row*80,80,5);
-//     ctx.fillRect(col*80,row*80,5,80);
-//     ctx.fillRect(col*80+75,row*80,5,80);
-//     ctx.fillRect(col*80,row*80+75,80,5);
-//
-//   });
-//
-//   // Draw passages
-//   ctx.fillStyle = "white";
-//   cells.forEach(function(cell) {
-//     var row = cell.row;
-//     var col = cell.col;
-//     // Draw east/west passage
-//     if(cell.isLinked(cell.neighbors['east'])) {
-//       ctx.fillRect(col*80+70,row*80+6,20,68);
-//     }
-//     // Draw sout/north passage
-//     if(cell.isLinked(cell.neighbors['south'])) {
-//       ctx.fillRect(col*80+6,row*80+70,68,20);
-//     }
-//   });
-// }
-
 Render.prototype.flexible = function(grid) {
   // Initialize canvas and drawing tool
   var canvas = document.getElementById('maze');
@@ -360,6 +319,8 @@ Render.prototype.flexible = function(grid) {
     }
   });
 }
+
+// Render.prototype.
 
 exports.Render = Render;
 
@@ -415,14 +376,29 @@ var AldousBroder = require('./../js/aldousBroder.js').AldousBroder;
 
 $(document).ready(function(){
 
+  // Instantiate rendering engine
   var myRender = new Render();
+
+  // Set default grid size
+  var width = 8;
+  var height = 8;
+
+  // Keep width and height updated with slider inputs
+  $('input[name="rows"]').change(function() {
+    width = $('input[name="rows"]').val();
+    $('label[for="rows"]').text('Rows: ' + width);
+  });
+  $('input[name="cols"]').change(function() {
+    height = $('input[name="cols"]').val();
+    $('label[for="cols"]').text('Columns: ' + height);
+  });
 
   // Create an ASCII version of any grid, display must be true monospace to work. See DOM if you are having trouble viewing this version of the maze.
   // $('#mazePrint').append(myGrid.toHtmlString());
 
   $('button[name="binaryMaze"]').click(function() {
     var myGrid = new Grid();
-    myGrid.setSize(16,16);
+    myGrid.setSize(width,height);
     myGrid.initialize();
     console.log("The Grid", myGrid);
     var myBinaryTree = new BinaryTree();
@@ -432,7 +408,7 @@ $(document).ready(function(){
 
   $('button[name="sidewinderMaze"]').click(function() {
     var myGrid = new Grid();
-    myGrid.setSize(16,16);
+    myGrid.setSize(width,height);
     myGrid.initialize();
     console.log("The Grid", myGrid);
     var mySidewinder = new Sidewinder();
@@ -442,7 +418,7 @@ $(document).ready(function(){
 
   $('button[name="aldousbroderMaze"]').click(function() {
     var myGrid = new Grid();
-    myGrid.setSize(32,32);
+    myGrid.setSize(width,height);
     myGrid.initialize();
     console.log("The Grid", myGrid);
     var myAldousBroder = new AldousBroder();

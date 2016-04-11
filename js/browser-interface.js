@@ -13,14 +13,29 @@ var AldousBroder = require('./../js/aldousBroder.js').AldousBroder;
 
 $(document).ready(function(){
 
+  // Instantiate rendering engine
   var myRender = new Render();
+
+  // Set default grid size
+  var width = 8;
+  var height = 8;
+
+  // Keep width and height updated with slider inputs
+  $('input[name="rows"]').change(function() {
+    width = $('input[name="rows"]').val();
+    $('label[for="rows"]').text('Rows: ' + width);
+  });
+  $('input[name="cols"]').change(function() {
+    height = $('input[name="cols"]').val();
+    $('label[for="cols"]').text('Columns: ' + height);
+  });
 
   // Create an ASCII version of any grid, display must be true monospace to work. See DOM if you are having trouble viewing this version of the maze.
   // $('#mazePrint').append(myGrid.toHtmlString());
 
   $('button[name="binaryMaze"]').click(function() {
     var myGrid = new Grid();
-    myGrid.setSize(16,16);
+    myGrid.setSize(width,height);
     myGrid.initialize();
     console.log("The Grid", myGrid);
     var myBinaryTree = new BinaryTree();
@@ -30,7 +45,7 @@ $(document).ready(function(){
 
   $('button[name="sidewinderMaze"]').click(function() {
     var myGrid = new Grid();
-    myGrid.setSize(16,16);
+    myGrid.setSize(width,height);
     myGrid.initialize();
     console.log("The Grid", myGrid);
     var mySidewinder = new Sidewinder();
@@ -40,7 +55,7 @@ $(document).ready(function(){
 
   $('button[name="aldousbroderMaze"]').click(function() {
     var myGrid = new Grid();
-    myGrid.setSize(32,32);
+    myGrid.setSize(width,height);
     myGrid.initialize();
     console.log("The Grid", myGrid);
     var myAldousBroder = new AldousBroder();

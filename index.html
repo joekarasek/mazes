@@ -17,6 +17,13 @@
       <button type="button" name="binaryMaze" class="btn btn-primary">BinaryTree</button>
       <button type="button" name="sidewinderMaze" class="btn btn-primary">Sidewinder</button>
       <button type="button" name="aldousbroderMaze" class="btn btn-primary">Aldous-Broder</button>
+      <form class="grid-size">
+        <label for="rows">Rows: 8</label>
+        <input name="rows" type="range" value="8" min="2" max="80" steps="1">
+        <label for="cols">Columns: 8</label>
+        <input name="cols" type="range" value="8" min="2" max="80" steps="1">
+      </form>
+
       <div class="container"> <br>
         <canvas id="maze" width="800" height="800" style="border: 1px solid black;">
 
