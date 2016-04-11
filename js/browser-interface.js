@@ -17,8 +17,8 @@ $(document).ready(function(){
   var myRender = new Render();
 
   // Set default grid size
-  var width = 8;
-  var height = 8;
+  var width = 40;
+  var height = 40;
 
   // Keep width and height updated with slider inputs
   $('input[name="rows"]').change(function() {
