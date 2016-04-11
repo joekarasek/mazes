@@ -25,7 +25,7 @@ $(document).ready(function(){
     console.log("The Grid", myGrid);
     var myBinaryTree = new BinaryTree();
     myBinaryTree.generate(myGrid);
-    myRender.simple(myGrid);
+    myRender.flexible(myGrid);
   });
 
   $('button[name="sidewinderMaze"]').click(function() {
