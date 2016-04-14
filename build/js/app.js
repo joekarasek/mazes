@@ -297,25 +297,17 @@ Render.prototype.flexible = function(grid) {
   ctx.clearRect(0,0,canvasWidth,canvasHeight);
 
   // Draw walls
-  ctx.fillStyle = "green";
-  cells.forEach(function(cell) {
-    var row = cell.row;
-    var col = cell.col;
-    ctx.strokeRect(col*cellWidth,row*cellHeight,cellWidth,cellHeight);
-  });
-
-  // Draw passages
-  ctx.fillStyle = "white";
+  ctx.fillStyle = "black";
   cells.forEach(function(cell) {
     var row = cell.row;
     var col = cell.col;
     // Draw east/west passage
-    if(cell.isLinked(cell.neighbors['east'])) {
-      ctx.fillRect((col+1)*cellWidth-1,row*cellHeight+1,2,cellHeight-2);
+    if(!cell.isLinked(cell.neighbors['east'])) {
+      ctx.strokeRect((col+1)*cellWidth,row*cellHeight,1,cellHeight);
     }
     // Draw sout/north passage
-    if(cell.isLinked(cell.neighbors['south'])) {
-      ctx.fillRect(col*cellWidth+1,(row+1)*cellHeight-1,cellWidth-2,2);
+    if(!cell.isLinked(cell.neighbors['south'])) {
+      ctx.strokeRect(col*cellWidth,(row+1)*cellHeight,cellWidth,1);
     }
   });
 }
