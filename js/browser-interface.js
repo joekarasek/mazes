@@ -22,12 +22,12 @@ $(document).ready(function(){
 
   // Keep width and height updated with slider inputs
   $('input[name="rows"]').change(function() {
-    width = $('input[name="rows"]').val();
-    $('label[for="rows"]').text('Rows: ' + width);
+    height = $('input[name="rows"]').val();
+    $('label[for="rows"]').text('Rows: ' + height);
   });
   $('input[name="cols"]').change(function() {
-    height = $('input[name="cols"]').val();
-    $('label[for="cols"]').text('Columns: ' + height);
+    width = $('input[name="cols"]').val();
+    $('label[for="cols"]').text('Columns: ' + width);
   });
 
   // Create an ASCII version of any grid, display must be true monospace to work. See DOM if you are having trouble viewing this version of the maze.
@@ -41,7 +41,7 @@ $(document).ready(function(){
     var myBinaryTree = new BinaryTree();
     myBinaryTree.generate(myGrid);
     myGrid.clearDistance();
-    myGrid.setDijkstra(myGrid.cells[0][0]);
+    myGrid.setDijkstra(myGrid.cells[height-1][0]);
     myRender.colored(myGrid);
   });
 
@@ -52,7 +52,9 @@ $(document).ready(function(){
     console.log("The Grid", myGrid);
     var mySidewinder = new Sidewinder();
     mySidewinder.generate(myGrid, 0.5);
-    myRender.flexible(myGrid);
+    myGrid.clearDistance();
+    myGrid.setDijkstra(myGrid.cells[height-1][Math.floor(width/2)]);
+    myRender.colored(myGrid);
   });
 
   $('button[name="aldousbroderMaze"]').click(function() {
@@ -62,7 +64,9 @@ $(document).ready(function(){
     console.log("The Grid", myGrid);
     var myAldousBroder = new AldousBroder();
     myAldousBroder.generate(myGrid);
-    myRender.flexible(myGrid);
+    myGrid.clearDistance();
+    myGrid.setDijkstra(myGrid.cells[Math.floor(width/2)][Math.floor(width/2)]);
+    myRender.colored(myGrid);
   });
 
 });
