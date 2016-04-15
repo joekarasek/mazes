@@ -295,6 +295,7 @@ Grid.prototype.clearDistance = function() {
 Grid.prototype.setDijkstra = function(rootCell) {
   rootCell.distance = 0;
   var frontier = [rootCell];
+  var maxDistance = 0;
 
   while (frontier.length > 0) {
     var newFrontier = [];
@@ -306,9 +307,11 @@ Grid.prototype.setDijkstra = function(rootCell) {
           newFrontier.push(linkedCell);
         }
       })
+      maxDistance = frontier[0].distance;
     })
     frontier = newFrontier;
   }
+  this.maxDistance = maxDistance;
 }
 
 exports.Grid = Grid;
@@ -346,23 +349,9 @@ Render.prototype.flexible = function(grid) {
 
   // Draw all walls
   this.drawAllWalls(ctx, cells, canvasConfig);
-  // ctx.fillStyle = "black";
-  // cells.forEach(function(cell) {
-  //   var row = cell.row;
-  //   var col = cell.col;
-  //   // Draw east/west passage
-  //   if(!cell.isLinked(cell.neighbors['east'])) {
-  //     ctx.strokeRect((col+1)*cellWidth,row*cellHeight,1,cellHeight);
-  //   }
-  //   // Draw sout/north passage
-  //   if(!cell.isLinked(cell.neighbors['south'])) {
-  //     ctx.strokeRect(col*cellWidth,(row+1)*cellHeight,cellWidth,1);
-  //   }
-  // });
 }
 
 Render.prototype.drawAllWalls= function(ctx, cells, canvasConfig) {
-
   var cellWidth = canvasConfig.canvasWidth/canvasConfig.cols;
   var cellHeight = canvasConfig.canvasHeight/canvasConfig.rows;
 
@@ -380,6 +369,34 @@ Render.prototype.drawAllWalls= function(ctx, cells, canvasConfig) {
       ctx.strokeRect(col*cellWidth,(row+1)*cellHeight,cellWidth,1);
     }
   });
+}
+
+Render.prototype.colored = function(grid) {
+  // Initialize canvas and drawing tool
+  var canvas = document.getElementById('maze');
+  var ctx = canvas.getContext('2d');
+
+  // Get all the cells of the maze
+  var cells = grid.getAll();
+  // Set variables for flexible drawing
+  var canvasWidth = 800;
+  var canvasHeight = 800;
+  var rows = grid.rows;
+  var cols = grid.cols;
+  var canvasConfig = {
+    canvasWidth: canvasWidth,
+    canvasHeight: canvasHeight,
+    rows: rows,
+    cols: cols
+  };
+
+  // Clear the canvas
+  ctx.fillStyle = "white";
+  ctx.clearRect(0,0,canvasWidth,canvasHeight);
+
+  this.
+  // Draw all walls
+  this.drawAllWalls(ctx, cells, canvasConfig);
 }
 
 exports.Render = Render;

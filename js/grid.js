@@ -162,6 +162,7 @@ Grid.prototype.clearDistance = function() {
 Grid.prototype.setDijkstra = function(rootCell) {
   rootCell.distance = 0;
   var frontier = [rootCell];
+  var maxDistance = 0;
 
   while (frontier.length > 0) {
     var newFrontier = [];
@@ -173,9 +174,11 @@ Grid.prototype.setDijkstra = function(rootCell) {
           newFrontier.push(linkedCell);
         }
       })
+      maxDistance = frontier[0].distance;
     })
     frontier = newFrontier;
   }
+  this.maxDistance = maxDistance;
 }
 
 exports.Grid = Grid;
