@@ -57,5 +57,17 @@ Cell.prototype.sampleNeighbor = function() {
   return this.neighbors[keys[index]];
 }
 
+//================
+// Distance funcitons
+
+// Get and set a distance
+Cell.prototype.setDistance = function(distance) {
+  this.distance = distance;
+}
+
+Cell.prototype.getDistance = function() {
+  return this.distance;
+}
+
 
 exports.Cell = Cell;

@@ -115,6 +115,18 @@ Cell.prototype.sampleNeighbor = function() {
   return this.neighbors[keys[index]];
 }
 
+//================
+// Distance funcitons
+
+// Get and set a distance
+Cell.prototype.setDistance = function(distance) {
+  this.distance = distance;
+}
+
+Cell.prototype.getDistance = function() {
+  return this.distance;
+}
+
 
 exports.Cell = Cell;
 
@@ -231,7 +243,7 @@ Grid.prototype.size = function() {
 // Start: Displayers
 
 // Simple text version of maze, suggest you use monospace font-family
-Grid.prototype.toHtmlString= function() {
+Grid.prototype.toHtmlString = function() {
   var result = '<p>+';
 
   // Build top border
@@ -266,6 +278,37 @@ Grid.prototype.toHtmlString= function() {
   }
 
   return result;
+}
+
+// End: Displayers
+// =================================
+// Start: Distance/Dijkstra
+
+Grid.prototype.clearDistance = function() {
+  for (i=0; i<this.rows; i++) {
+    for (j=0; j<this.cols; j++) {
+      this.cells[i][j].distance = null;
+    }
+  }
+}
+
+Grid.prototype.setDijkstra = function(rootCell) {
+  rootCell.distance = 0;
+  var frontier = [rootCell];
+
+  while (frontier.length > 0) {
+    var newFrontier = [];
+
+    frontier.forEach(function(cell) {
+      cell.links.forEach(function(linkedCell) {
+        if (linkedCell.distance === null) {
+          linkedCell.distance = cell.distance + 1;
+          newFrontier.push(linkedCell);
+        }
+      })
+    })
+    frontier = newFrontier;
+  }
 }
 
 exports.Grid = Grid;
@@ -395,6 +438,8 @@ $(document).ready(function(){
     console.log("The Grid", myGrid);
     var myBinaryTree = new BinaryTree();
     myBinaryTree.generate(myGrid);
+    myGrid.clearDistance();
+    myGrid.setDijkstra(myGrid.cells[0][0]);
     myRender.flexible(myGrid);
   });
 

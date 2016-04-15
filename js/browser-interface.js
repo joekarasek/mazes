@@ -40,6 +40,8 @@ $(document).ready(function(){
     console.log("The Grid", myGrid);
     var myBinaryTree = new BinaryTree();
     myBinaryTree.generate(myGrid);
+    myGrid.clearDistance();
+    myGrid.setDijkstra(myGrid.cells[0][0]);
     myRender.flexible(myGrid);
   });
 
