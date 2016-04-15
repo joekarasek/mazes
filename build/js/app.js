@@ -389,12 +389,20 @@ Render.prototype.colored = function(grid) {
     rows: rows,
     cols: cols
   };
+  var cellWidth = canvasConfig.canvasWidth/canvasConfig.cols;
+  var cellHeight = canvasConfig.canvasHeight/canvasConfig.rows;
 
   // Clear the canvas
   ctx.fillStyle = "white";
   ctx.clearRect(0,0,canvasWidth,canvasHeight);
 
-  this.
+  cells.forEach(function(cell) {
+    // ctx.fillStyle = "hsla(0%," + (cell.distance/grid.maxDistance * 100) + "%,0%,1)";
+    ctx.fillStyle = "hsl(120,100%," + ((cell.distance/grid.maxDistance * 80)+20) + "%)";
+    // debugger;
+    ctx.fillRect(cell.col*cellWidth,cell.row*cellHeight,cellWidth,cellHeight);
+  })
+
   // Draw all walls
   this.drawAllWalls(ctx, cells, canvasConfig);
 }
@@ -482,7 +490,7 @@ $(document).ready(function(){
     myBinaryTree.generate(myGrid);
     myGrid.clearDistance();
     myGrid.setDijkstra(myGrid.cells[0][0]);
-    myRender.flexible(myGrid);
+    myRender.colored(myGrid);
   });
 
   $('button[name="sidewinderMaze"]').click(function() {

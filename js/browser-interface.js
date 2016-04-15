@@ -42,7 +42,7 @@ $(document).ready(function(){
     myBinaryTree.generate(myGrid);
     myGrid.clearDistance();
     myGrid.setDijkstra(myGrid.cells[0][0]);
-    myRender.flexible(myGrid);
+    myRender.colored(myGrid);
   });
 
   $('button[name="sidewinderMaze"]').click(function() {
