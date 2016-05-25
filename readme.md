@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/joekarasek/mazes.svg?branch=master)](https://travis-ci.org/joekarasek/mazes)
+
 # _Mazes_
 
 #### _An app for exploring the generation of mazes, 4.11.2016_
