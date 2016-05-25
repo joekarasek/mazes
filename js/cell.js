@@ -20,7 +20,7 @@ function Cell() {
 // Set a cell as a neighbor of this cell
 Cell.prototype.addNeighbor = function(cell, relation) {
   this.neighbors[relation] = cell;
-}
+};
 // Bidirectional linking of cells
 Cell.prototype.link = function(cell) {
   if (this.links.indexOf(cell) === -1) {
@@ -45,7 +45,7 @@ Cell.prototype.isLinked = function(queryCell) {
   } else {
     return true;
   }
-}
+};
 
 // Sample a neighbor
 Cell.prototype.sampleNeighbor = function() {
@@ -55,7 +55,7 @@ Cell.prototype.sampleNeighbor = function() {
     index = Math.floor(Math.random() * 4);
   } while (!this.neighbors[keys[index]]);
   return this.neighbors[keys[index]];
-}
+};
 
 //================
 // Distance funcitons
@@ -63,11 +63,11 @@ Cell.prototype.sampleNeighbor = function() {
 // Get and set a distance
 Cell.prototype.setDistance = function(distance) {
   this.distance = distance;
-}
+};
 
 Cell.prototype.getDistance = function() {
   return this.distance;
-}
+};
 
 
 exports.Cell = Cell;

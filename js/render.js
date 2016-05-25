@@ -30,7 +30,7 @@ Render.prototype.flexible = function(grid) {
 
   // Draw all walls
   this.drawAllWalls(ctx, cells, canvasConfig);
-}
+};
 
 Render.prototype.drawAllWalls= function(ctx, cells, canvasConfig) {
   var cellWidth = canvasConfig.canvasWidth/canvasConfig.cols;
@@ -42,15 +42,15 @@ Render.prototype.drawAllWalls= function(ctx, cells, canvasConfig) {
     var row = cell.row;
     var col = cell.col;
     // Draw east/west passage
-    if(!cell.isLinked(cell.neighbors['east'])) {
+    if(!cell.isLinked(cell.neighbors.east)) {
       ctx.strokeRect((col+1)*cellWidth,row*cellHeight,1,cellHeight);
     }
     // Draw sout/north passage
-    if(!cell.isLinked(cell.neighbors['south'])) {
+    if(!cell.isLinked(cell.neighbors.south)) {
       ctx.strokeRect(col*cellWidth,(row+1)*cellHeight,cellWidth,1);
     }
   });
-}
+};
 
 Render.prototype.colored = function(grid) {
   // Initialize canvas and drawing tool
@@ -82,10 +82,10 @@ Render.prototype.colored = function(grid) {
     ctx.fillStyle = "hsl(120,100%," + ((cell.distance/grid.maxDistance * 80)+20) + "%)";
     // debugger;
     ctx.fillRect(cell.col*cellWidth,cell.row*cellHeight,cellWidth,cellHeight);
-  })
+  });
 
   // Draw all walls
   this.drawAllWalls(ctx, cells, canvasConfig);
-}
+};
 
 exports.Render = Render;

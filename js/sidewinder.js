@@ -13,8 +13,8 @@ Sidewinder.prototype.generate = function(grid, param) {
     row.forEach(function(cell) {
       run.push(cell);
 
-      var at_eastern_boundary = (cell.neighbors.east == null);
-      var at_northern_boundary = (cell.neighbors.north == null);
+      var at_eastern_boundary = (cell.neighbors.east === null);
+      var at_northern_boundary = (cell.neighbors.north === null);
 
       should_close_out = at_eastern_boundary || (!at_northern_boundary && Math.random() < param);
 
@@ -29,6 +29,6 @@ Sidewinder.prototype.generate = function(grid, param) {
       }
     });
   });
-}
+};
 
 exports.Sidewinder = Sidewinder;

@@ -25,7 +25,7 @@ Grid.prototype.setSize = function(rows, cols) {
       this.cells[i][j].col = j;
     }
   }
-}
+};
 
 // Move through the grid and give each cell any initial properties needed (many neighbors)
 Grid.prototype.initialize = function() {
@@ -35,7 +35,7 @@ Grid.prototype.initialize = function() {
       this.setNeighbors(this.getCell(i,j));
     }
   }
-}
+};
 
 // Used by initialize to set neighbors of all cells, configed to work with square cells
 Grid.prototype.setNeighbors = function(cell) {
@@ -54,7 +54,7 @@ Grid.prototype.setNeighbors = function(cell) {
   if (this.getCell(row, col+1)) {
     cell.addNeighbor(this.getCell(row, col+1), 'east');
   }
-}
+};
 
 // End: Initializers
 // =================================
@@ -77,7 +77,7 @@ Grid.prototype.sample = function() {
   var randomRow = Math.floor((Math.random() * this.rows) + 1);
   var randomCol = Math.floor((Math.random() * this.cols) + 1);
   return this.getCell(randomRow, randomCol);
-}
+};
 
 // Get a row of the grid
 Grid.prototype.getRow = function(row) {
@@ -87,7 +87,7 @@ Grid.prototype.getRow = function(row) {
   } else {
     return false;
   }
-}
+};
 
 // Get all cells, as an array
 Grid.prototype.getAll = function() {
@@ -98,12 +98,12 @@ Grid.prototype.getAll = function() {
     }
   }
   return results;
-}
+};
 
 // Get the total number of cells in the grid
 Grid.prototype.size = function() {
   return this.getAll().length;
-}
+};
 
 // End: Getters
 // =================================
@@ -145,7 +145,7 @@ Grid.prototype.toHtmlString = function() {
   }
 
   return result;
-}
+};
 
 // End: Displayers
 // =================================
@@ -157,7 +157,7 @@ Grid.prototype.clearDistance = function() {
       this.cells[i][j].distance = null;
     }
   }
-}
+};
 
 Grid.prototype.setDijkstra = function(rootCell) {
   rootCell.distance = 0;
@@ -173,12 +173,12 @@ Grid.prototype.setDijkstra = function(rootCell) {
           linkedCell.distance = cell.distance + 1;
           newFrontier.push(linkedCell);
         }
-      })
+      });
       maxDistance = frontier[0].distance;
-    })
+    });
     frontier = newFrontier;
   }
   this.maxDistance = maxDistance;
-}
+};
 
 exports.Grid = Grid;
